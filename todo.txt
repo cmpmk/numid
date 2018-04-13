@@ -1,0 +1,7 @@
+Give Patrick admin privs
+
+Add comments to numid.py
+
+Finish Fortran routine for trapezoidal integration method
+       - Check if it accepts lambda functions defined in python
+
