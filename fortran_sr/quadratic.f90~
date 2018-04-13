@@ -1,6 +1,0 @@
-program quadratic
-  implicit none
-  real :: x1, x2
-  integer :: a, b, c
-
-  
