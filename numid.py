@@ -2,8 +2,7 @@ from numpy import linspace
 
 # --------------------------- Numerical Integration ------------------------
 # Trapezoidal method for integration
-# First input is a function, second (a) is the lower limit,
-# third (b): upper limit, fourth: (n) number of trapezoids under the function
+# Inputs: function, lower limit, upper limit, number of trapezoids
 
 def trapezoidal(f, a, b, n):
     h = float(b-a)/n
@@ -49,18 +48,31 @@ def midpoint_double(f, a, b, c, d, nx, ny):
     return I
 
 # --------------------------- Numerical Differentiation --------------------
-# Forward Difference Method:
+''' First Order Derivatives: '''
+def ForwardDiff(f, x):
+    h = 0.0001
+    return (f(x+h) - f(x))/(1.*h)
 
-def ForwardDiff(f, x, h):
-    num = float(f(x+h) - f(x))
-    return num/h
 
-# Central Difference Method:
-def CentralDiff(f, x, h):
-    f1 = f(x-2*h) + 8*f(x+h)
-    f2 = 8*f(x-h) + f(x+2*h)
-    cd = (1.0/12*h)*(f1 - f2)
-    return cd
+def BackwardDiff(f, x):
+    h = 0.0001
+    return (f(x) - f(x-h))/(1.*h)
+
+
+def CentralDiff(f, x):
+    h = 0.0001
+    return (f(x+h) - f(x-h))/(2.*h)
+
+''' Second Order Derivatives: '''
+def CentralDiff2(f, x):
+    h = 0.0001
+    return (f(x+h) - 2.*f(x) + f(x-h))/(h*h)
+    
+    
+
+
+
+
 
 def help():
     print("Available Functions: \
