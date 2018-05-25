@@ -1,1 +1,2 @@
-Add euler method for ODEs
+Make a help class that prints functionality and examples for each method such as:
+help.trapezoidal() prints how to use that specific method
