@@ -30,8 +30,7 @@ def midpoint(f, a, b, n):
     return result
     
 # Midpoint Method for Double Integrals
-# [a,b]: lower and upper bounds for integral wrt x
-# [c,d]: lower and upper bounds for integral wrt y
+# [a,b]: lower and upper bounds wrt x, [c,d] : bounds wrt y
 # [nx,ny]: points along x and points along y
 
 def midpoint_double(f, a, b, c, d, nx, ny):
@@ -78,10 +77,20 @@ def eul(f, x0, y0, xf):
         yn.append(yn[i] + h*f(xn[i], yn[i]))
     return xn, yn
 # --------------------------------------------------------------------------
-# ---------------------------General Calls:---------------------------------
+# ---------------------------General Calls----------------------------------
 # --------------------------------------------------------------------------
-def numInt(f, a, b, n, method):
+def Integrate(f, a, b, n, method):
     if method == 'trapvec':
         return trapvec(f, a, b, n)
     if method == 'trapezoidal':
         return trapezoidal(f, a, b, n)
+    if method == 'midpoint':
+        return midpoint(f, a, b, n)
+
+def Differentiate(f, a, b, n, method):
+    if method == 'Forward':
+        return ForwardDiff(f, x)
+    if method == 'Central':
+        return CentralDiff(f, x)
+    if method == 'Backward':
+        return BackwardDiff(f, x)
