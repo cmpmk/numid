@@ -1,4 +1,4 @@
-from numpy import linspace
+from numpy import linspace, zeros, size
 
 # --------------------------------------------------------------------------
 # --------------------------- Numerical Integration ------------------------
@@ -67,15 +67,33 @@ def CentralDiff2(f, x):
 # --------------------------Numerical Methods for ODEs----------------------
 # --------------------------------------------------------------------------    
 ''' Euler's Method ''' 
-def eul(f, x0, y0, xf):
-    h = 0.001
-    xn = [x0]
-    yn = [y0]
-    N = int((xf - x0)/h)
-    for i in range(N):
-        xn.append(xn[i] + h)
-        yn.append(yn[i] + h*f(xn[i], yn[i]))
-    return xn, yn
+def eul(f, x0, xf):
+    t = linspace(x0, xf, 1000)
+    h = (xf - x0)/1.0e3
+    x = zeros(size(t))
+    for i in range(size(t)):
+        if i == 0:
+            x[i] = x0
+        else:
+            x[i] = x[i-1] + h*f(x[i-1], t[i-1])
+    return t, x
+
+''' Runge-Kutta 4th Order '''
+def rk4(f, x0, xf):
+    t = linspace(x0, xf, 1000)
+    #h = (xf - x0)/1.0e3
+    h = 0.05
+    x = zeros(size(t))
+    for i in range(size(t)):
+        if i == 0:
+            x[i] = x0
+        else:
+            k1 = h*f(x[i-1], t[i-1])
+            k2 = h*f(x[i-1] + 0.5*k1, t[i-1] + 0.5*h)
+            k3 = h*f(x[i-1] + 0.5*k2, t[i-1] + 0.5*h)
+            k4 = h*f(x[i-1] + k3, t[i-1] + h)
+            x[i] = x[i-1] + 1/6.*(k1 + 2*(k2 + k3) + k4)
+    return t, x
 # --------------------------------------------------------------------------
 # ---------------------------General Calls----------------------------------
 # --------------------------------------------------------------------------
@@ -94,3 +112,8 @@ def Differentiate(f, a, b, n, method):
         return CentralDiff(f, x)
     if method == 'Backward':
         return BackwardDiff(f, x)
+
+def Help(method):
+    if method == 'trapezoidal' or 'trapvec':
+        print('trapezoidal(f, a, b, n)')
+    
