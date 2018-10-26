@@ -4,7 +4,7 @@ from numpy import linspace, zeros, size
 # --------------------------- Numerical Integration ------------------------
 # --------------------------------------------------------------------------
 # Trapezoidal method for integration
-# Inputs: function, lower limit, upper limit, number of trapezoids
+# Inputs: function, lower, upper limit, number of trapezoids
 
 def trapezoidal(f, a, b, n):
     h = float(b-a) / n
@@ -43,9 +43,11 @@ def midpoint_double(f, a, b, c, d, nx, ny):
             yj = c + 0.5*hy + j*hy
             I += hx*hy*f(xi, yj)
     return I
+
 # --------------------------------------------------------------------------
 # --------------------------- Numerical Differentiation --------------------
 # --------------------------------------------------------------------------
+
 ''' First Order Derivatives: '''
 def ForwardDiff(f, x):
     h = 0.0001
@@ -63,9 +65,11 @@ def CentralDiff(f, x):
 def CentralDiff2(f, x):
     h = 0.0001
     return (f(x+h) - 2.*f(x) + f(x-h))/(h*h)
+
 # --------------------------------------------------------------------------    
 # --------------------------Numerical Methods for ODEs----------------------
 # --------------------------------------------------------------------------    
+
 ''' Euler's Method ''' 
 def eul(f, x0, xf):
     t = linspace(x0, xf, 1000)
@@ -94,9 +98,11 @@ def rk4(f, x0, xf):
             k4 = h*f(x[i-1] + k3, t[i-1] + h)
             x[i] = x[i-1] + 1/6.*(k1 + 2*(k2 + k3) + k4)
     return t, x
+
 # --------------------------------------------------------------------------
 # ---------------------------General Calls----------------------------------
 # --------------------------------------------------------------------------
+
 def Integrate(f, a, b, n, method):
     if method == 'trapvec':
         return trapvec(f, a, b, n)
@@ -112,8 +118,3 @@ def Differentiate(f, a, b, n, method):
         return CentralDiff(f, x)
     if method == 'Backward':
         return BackwardDiff(f, x)
-
-def Help(method):
-    if method == 'trapezoidal' or 'trapvec':
-        print('trapezoidal(f, a, b, n)')
-    
