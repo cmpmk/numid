@@ -2,7 +2,9 @@ from numpy import linspace, zeros, size
 
 class numid:
     def __init__(self, f, a, b, n):
-        self.f, self.a, self.b  = f, a, b
+        self.f = f
+        self.a = a
+        self.b = b
         self.n = n
         self.h = float(self.b - self.a) / self.n
 # Trapezoidal method    
